@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/css/index.css}">
+</head>
+<body>
+    <!--Decoración-->
+    <div class="logo-wrapper">
+        <img class="bar-tender" th:src="@{/img/bartender.jpg}" />
+    </div>
+    <!--Card con apartado de formulario y lista de log-->
+    <div class="form-wrapper">
+        <div class="container">
+            <form method="post" th:action="@{/}">
+                <div class="row">
+                    <div class="col-12 mb-4">
+                        <div class="logo-aldeamo-wrapper">
+                            <img class="logo-aldeamo mb-3" src="https://www.aldeamo.com/wp-content/uploads/2022/08/Logos-ALDEAMO-PEQUENO.png" />
+                            <h4>Prueba de selección</h4>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <ul class="nav nav-pills justify-content-center" id="pills-tab" role="tablist">
+                                    <li class="nav-item" role="presentation">
+                                        <button
+                                                class="nav-link active"
+                                                id="pills-home-tab"
+                                                data-bs-toggle="pill"
+                                                data-bs-target="#pills-home"
+                                                type="button"
+                                                role="tab"
+                                                aria-controls="pills-home"
+                                                aria-selected="true">
+                                                    Inicio
+                                        </button>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                        <button
+                                                class="nav-link"
+                                                id="pills-log-tab"
+                                                data-bs-toggle="pill"
+                                                data-bs-target="#pills-log"
+                                                type="button"
+                                                role="tab"
+                                                aria-controls="pills-log"
+                                                aria-selected="false">
+                                                    Log
+                                        </button>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="card-body">
+                                <div class="tab-content" id="pills-tabContent">
+                                    <div
+                                            class="tab-pane fade show active"
+                                            id="pills-home"
+                                            role="tabpanel"
+                                            aria-labelledby="pills-home-tab"
+                                            tabindex="0">
+                                        <div class="row">
+                                            <!--Card de notificación del resultado sea correcto o erróneo-->
+                                            <div class="col-12">
+                                                <div th:if="${typeMessage == '0'}" class="alert alert-danger" role="alert">
+                                                    <div class="card bg-transparent border-0">
+                                                        <div class="card-body">
+                                                            <h5 class="card-title">Upss...</h5>
+                                                            <p th:text="${message}">Message</p>
+                                                            <button
+                                                                    type="button"
+                                                                    class="btn btn-outline-danger"
+                                                                    data-bs-dismiss="alert"
+                                                                    aria-label="Close">
+                                                                    Cerrar
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div th:if="${typeMessage == '1'}" class="alert alert-success" role="alert">
+                                                    <div class="card bg-transparent border-0">
+                                                        <div class="card-body">
+                                                            <h5 class="card-title">¡Buen trabajo!</h5>
+                                                            <p th:text="${message}">Message</p>
+                                                            <button
+                                                                    type="button"
+                                                                    class="btn btn-outline-success"
+                                                                    data-bs-dismiss="alert" aria-label="Close">
+                                                                    Cerrar
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--Formulario principal-->
+                                            <div class="col-6">
+                                                <div class="mb-3">
+                                                    <label for="qSize" class="form-label">Número de iteraciones</label>
+                                                    <input
+                                                            type="number"
+                                                            class="form-control"
+                                                            id="qSize"
+                                                            min="1"
+                                                            th:name="qSize"
+                                                            placeholder="Número de iteraciones">
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="mb-3">
+                                                    <label for="dataRange" class="form-label">No. pila de datos</label>
+                                                    <select
+                                                            class="form-select"
+                                                            id="dataRange"
+                                                            th:name="dataRange"
+                                                            aria-label="Default select example">
+                                                        <option selected>--Seleccione--</option>
+                                                        <option value="1">1</option>
+                                                        <option value="2">2</option>
+                                                        <option value="3">3</option>
+                                                        <option value="4">4</option>
+                                                        <option value="5">5</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <div class="d-grid gap-2 col-6 mx-auto">
+                                                    <button
+                                                            class="btn btn-primary"
+                                                            type="submit" name="iterate">
+                                                            ¡Iterar!
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--Listamos el log si el usuario ya ha iterado en primer lugar-->
+                                    <div class="tab-pane fade" id="pills-log" role="tabpanel" aria-labelledby="pills-log-tab" tabindex="0">
+                                        <th:block th:switch="${logs != null}">
+                                            <ul th:case="${true}" class="list-group">
+                                                <li th:each="log: ${logs}" class="list-group-item">
+                                                    <p th:text="'Q' + ${log.qIterator}"></p>
+                                                    <p th:text="'Número primo = ' + ${log.primeNumber}"></p>
+                                                    <p th:text="'B=' + ${log.arrayB}"></p>
+                                                    <p th:text="'A=' + ${log.arrayA}"></p>
+                                                </li>
+                                                <li th:text="${message}" class="list-group-item">Message</li>
+                                            </ul>
+                                            <p th:case="${false}">No hay logs para mostrar</p>
+                                        </th:block>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"></script>
+</body>
+</html>

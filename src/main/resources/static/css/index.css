@@ -1,0 +1,40 @@
+.logo-wrapper {
+    display: block;
+    position: static;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.bar-tender {
+    position: absolute;
+    width: 60%;
+    right: 20px;
+}
+
+.form-wrapper {
+    display: flex;
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 60%;
+    align-items: center;
+    overflow: hidden;
+    overflow-y: auto;
+    box-sizing: border-box;
+    padding-left: 50px;
+}
+
+.list-group {
+    max-height: 300px;
+    overflow: hidden;
+    overflow-y: auto;
+}
+
+.logo-aldeamo {
+    display: block;
+    width: 30%;
+    height: auto;
+}
+
