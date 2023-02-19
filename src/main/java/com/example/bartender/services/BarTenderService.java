@@ -4,8 +4,6 @@ import com.example.bartender.dtos.LogDTO;
 import com.example.bartender.dtos.ResponseUserDTO;
 import com.example.bartender.entities.ArrayEntity;
 import com.example.bartender.repositories.ArrayRepository;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -22,8 +20,6 @@ import static com.example.bartender.utils.Utils.getStringFromArray;
  */
 @Service
 public class BarTenderService {
-
-    private static Logger logger = LoggerFactory.getLogger(BarTenderService.class);//Para logs en consola
 
     @Autowired//Interface repositorio que me permite acceder y/o manipular los datos de la tabla arrays
     private ArrayRepository arrayRepository;
